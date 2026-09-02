@@ -13,6 +13,7 @@ import {
   TriangleAlert,
   Users,
   PenLine,
+  Pencil,
 } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import { createSupabaseServerClient } from "@/lib/supabase-server";
@@ -145,69 +146,78 @@ const supabase = await createSupabaseServerClient();
         Back to dashboard
       </Link>
 
-      <section className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="border-b border-slate-100 p-5 sm:p-7">
-          <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            <div className="flex items-start gap-4">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#238bac] text-white">
-                <Building2 size={28} />
-              </div>
+     <section className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+  <div className="border-b border-slate-100 p-5 sm:p-7">
+    <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+      <div className="flex items-start gap-4">
+        <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#238bac] text-white">
+          <Building2 size={28} />
+        </div>
 
-              <div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <h1 className="text-2xl font-bold text-[#374151] sm:text-3xl">
-                    {typedProject.clinic_name}
-                  </h1>
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-2xl font-bold text-[#374151] sm:text-3xl">
+              {typedProject.clinic_name}
+            </h1>
 
-                  <span className="rounded-full bg-[#238bac]/10 px-3 py-1 text-xs font-bold text-[#238bac]">
-                    {typedProject.status}
-                  </span>
-                </div>
+            <span className="rounded-full bg-[#238bac]/10 px-3 py-1 text-xs font-bold text-[#238bac]">
+              {typedProject.status}
+            </span>
+          </div>
 
-                <div className="mt-2 flex items-start gap-2 text-sm text-slate-500">
-                  <MapPin className="mt-0.5 shrink-0" size={16} />
-                  <span>{address || "No address entered"}</span>
-                </div>
-              </div>
-            </div>
-
-            <Link
-              href={`/projects/${id}/walkthrough`}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#238bac] px-5 py-3 font-semibold text-white transition hover:bg-[#0086aa]"
-            >
-              <ClipboardCheck size={20} />
-              Start Walkthrough
-            </Link>
+          <div className="mt-2 flex items-start gap-2 text-sm text-slate-500">
+            <MapPin className="mt-0.5 shrink-0" size={16} />
+            <span>{address || "No address entered"}</span>
           </div>
         </div>
+      </div>
 
-        <div className="grid divide-y divide-slate-100 sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-4">
-          <ProjectDetail
-            icon={CalendarDays}
-            label="Final Walkthrough"
-            value={formatDate(typedProject.walkthrough_date)}
-          />
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <Link
+          href={`/projects/${id}/edit`}
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#238bac] bg-white px-5 py-3 font-semibold text-[#238bac] transition hover:bg-[#238bac]/5"
+        >
+          <Pencil size={19} />
+          Edit Clinic
+        </Link>
 
-          <ProjectDetail
-            icon={Clock3}
-            label="Target Completion"
-            value={formatDate(typedProject.target_completion_date)}
-          />
+        <Link
+          href={`/projects/${id}/walkthrough`}
+          className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#238bac] px-5 py-3 font-semibold text-white transition hover:bg-[#0086aa]"
+        >
+          <ClipboardCheck size={20} />
+          Start Walkthrough
+        </Link>
+      </div>
+    </div>
+  </div>
 
-          <ProjectDetail
-            icon={Users}
-            label="General Contractor"
-            value={typedProject.general_contractor || "Not entered"}
-          />
+  <div className="grid divide-y divide-slate-100 sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-4">
+    <ProjectDetail
+      icon={CalendarDays}
+      label="Final Walkthrough"
+      value={formatDate(typedProject.walkthrough_date)}
+    />
 
-          <ProjectDetail
-            icon={Users}
-            label="Milan CPM"
-            value={typedProject.milan_cpm_name || "Not entered"}
-          />
-        </div>
-      </section>
+    <ProjectDetail
+      icon={Clock3}
+      label="Target Completion"
+      value={formatDate(typedProject.target_completion_date)}
+    />
 
+    <ProjectDetail
+      icon={Users}
+      label="General Contractor"
+      value={typedProject.general_contractor || "Not entered"}
+    />
+
+    <ProjectDetail
+      icon={Users}
+      label="Milan CPM"
+      value={typedProject.milan_cpm_name || "Not entered"}
+    />
+  </div>
+</section>
       <section className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <SummaryCard
           label="Walkthrough Progress"
